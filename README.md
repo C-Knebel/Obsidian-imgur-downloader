@@ -1,4 +1,4 @@
-# Obsidian Imagur Downloader
+# Obsidian Imgur Downloader
 
 This Python script is designed to download images from Imgur links referenced within your Obsidian.md files and save them locally. Additionally, it updates the markdown files to reference the downloaded images locally.
 
