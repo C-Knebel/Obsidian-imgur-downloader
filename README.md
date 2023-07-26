@@ -60,4 +60,4 @@ The script may be useful for those who use the "obsidian-imgur-plugin" and wish 
 
 ## Disclaimer
 
-Use this script at your own risk. Always back up your data before running any scripts that modify your files.
+**ATTENTION: PLEASE BACKUP YOUR VAULT BEFORE USING THIS SCRIPT. IT WILL REPLACE THE REFERENCES TO IMGUR LINKS IN ALL YOUR MD FILES WITH LOCAL FILES.**
