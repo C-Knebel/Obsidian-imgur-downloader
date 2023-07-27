@@ -29,11 +29,10 @@ def download_image(link, image_name, output_folder):
             print(f"Failed to download the image: {image_name}")
 
 # Update the markdown file to reference the downloaded image locally
-def md_substitute(image_name, md_file, content):
+def md_substitute(image_name, content):
     image_tag = f"![[{image_name}]]"
     new_content = re.sub(r'!\[.*?\]\((https://i.imgur.com/.*?)\)', image_tag, content)
-    with open(md_file, 'w', encoding='utf-8') as file:
-        file.write(new_content)
+    return new_content
 
 def imgur_downloader(md_file):
     # Open the file
@@ -44,12 +43,14 @@ def imgur_downloader(md_file):
     base_folder = os.path.dirname(md_file)  
 
     # List of links within the "content" file
-    imgur_links = find_links(file)
+    imgur_links = find_links(content)
 
     # Use the folder "@imgur_photos" to save the images
     output_folder = os.path.join(base_folder, "@imgur_photos")
     # Create the folder
     create_folder(output_folder)  
+
+    new_content = content
 
     for idx, link in enumerate(imgur_links, start=1):
         # Naming the files based on the name and position in the links list
@@ -58,8 +59,11 @@ def imgur_downloader(md_file):
         # Download the image
         download_image(link, image_name, output_folder)
 
-    # Update: the content of the markdown file
-    md_substitute(image_name, md_file, content)
+        # Update: the content of the markdown file
+        new_content = md_substitute(image_name, new_content)
+    
+    with open(md_file, 'w', encoding='utf-8') as file:
+        file.write(new_content)
 
 # Function that calls the image downloader for each markdown file within folders/subfolders
 def folder_tree_call(folder_path):
